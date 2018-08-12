@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+
+jobs:
+  include:         
+    - stage: build
+      script: docker build -t sclack .
+    - stage: test
+      script:
+        - docker run -td --name sclack sclack
+        - docker ps -f name=sclack
